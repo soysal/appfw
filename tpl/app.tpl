@@ -3,8 +3,8 @@
 """
 
 
-Created on   : {now} ( Ergin Soysal )
-Last modified: Mar 15, 2020, Sun 12:53:57 -0500
+Created on   : {now} ( {author} )
+Last modified: Mar 15, 2020, Sun 13:09:34 -0500
 """
 from __future__ import absolute_import
 from __future__ import division

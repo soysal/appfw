@@ -4,7 +4,7 @@
 Application script generator
 
 Created on   : 2020-03-14 ( Ergin Soysal )
-Last modified: Mar 15, 2020, Sun 12:52:17 -0500
+Last modified: Mar 15, 2020, Sun 13:08:13 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -17,13 +17,17 @@ import os.path
 
 import re
 from datetime import datetime
+import getpass
 
 import argparse
 from appl import app
 
 
 DEFAULT_APP_NAME = 'My App'
-DEF_VARS = { 'now': datetime.now().isoformat(timespec='seconds') }
+DEF_VARS = {
+    'now': datetime.now().isoformat(timespec='seconds'),
+    'author': getpass.getuser()
+}
 APP_TPL='tpl/app.tpl'
 CONF_TPL='tpl/config.tpl'
 
