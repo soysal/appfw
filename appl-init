@@ -4,7 +4,7 @@
 Application script generator
 
 Created on   : 2020-03-14 ( Ergin Soysal )
-Last modified: Mar 15, 2020, Sun 13:08:13 -0500
+Last modified: Mar 15, 2020, Sun 16:10:46 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -95,18 +95,21 @@ def generate_file(out_name, tpl_name, vars=None):
     write_file(out_name, content)
 
 
-def build():
+def build(args):
     # Application name
-    app_name = get_app_name(DEFAULT_APP_NAME)
+    app_name = args.app_name or get_app_name(DEFAULT_APP_NAME)
 
     # Default names
     normal_name = normalize(app_name)
 
-    app_file = get_app_filename(normal_name)
-    conf_file = get_conf_filename(normal_name)
-    log_file = get_log_filename(normal_name)
-    vars = {'log_file': log_file, 'app_name': app_name, 'sec_name': 'log',
-            'normal_name': normal_name, 'conf_file': conf_file}
+    app_file = args.app_file or get_app_filename(normal_name)
+    conf_file = args.app_conf_file or get_conf_filename(normal_name)
+    log_file = args.app_log_file or get_log_filename(normal_name)
+    log_section = args.app_log_section or 'log'
+
+    vars = {'log_file': log_file, 'app_name': app_name,
+            'log_section':log_section, 'normal_name': normal_name,
+            'conf_file': conf_file}
 
     app.log.info('Generating application file %s', app_file)
     generate_file(app_file, APP_TPL, vars)
@@ -117,7 +120,7 @@ def build():
 
 def main(args, config):
     try:
-        build()
+        build(args)
     except Exception as e:
         # raise_with_traceback(e)
         app.log.exception(e)
@@ -130,6 +133,16 @@ def parse_args():
     parser.add_argument('--log-section', default='log', type=str,
                         help='Log section name in the configuration file')
     parser.add_argument('-o', '--output', default='.', help='Output folder')
+    parser.add_argument('-n', '--app-name', default=None,
+                        help='Application name')
+    parser.add_argument('-af', '--app-file', default=None,
+                        help='Application filename')
+    parser.add_argument('-cf', '--app-conf-file', default=None,
+                        help='Configuration filename')
+    parser.add_argument('-lf', '--app-log-file', default=None,
+                        help='Log filename')
+    parser.add_argument('-ls', '--app-log-section', default=None,
+                        help='Log configuration section name')
 
     return parser.parse_args()
 

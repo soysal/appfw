@@ -1,4 +1,4 @@
-[{sec_name}]
+[{log_section}]
 name={normal_name}
 filename={log_file}
 level=INFO
