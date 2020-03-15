@@ -5,15 +5,15 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name='py-app',
+    name='appl',
     version='0.1',
-    scripts=['py-app'],
+    scripts=['appl-init'],
     author="Ergin Soysal",
     author_email="esoysal@gmail.com",
     description="Application framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/soysal/py-app",
+    url="https://github.com/soysal/appl",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

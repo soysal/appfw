@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Py-App script generator
+Application script generator
 
 Created on   : 2020-03-14 ( Ergin Soysal )
-Last modified: Mar 14, 2020, Sat 13:05:18 -0500
+Last modified: Mar 15, 2020, Sun 12:52:17 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -19,7 +19,7 @@ import re
 from datetime import datetime
 
 import argparse
-import app
+from appl import app
 
 
 DEFAULT_APP_NAME = 'My App'
@@ -120,8 +120,8 @@ def main(args, config):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='''Py-App script generator''')
-    parser.add_argument('-c', '--cfgfile', default='py-app.cfg',
+    parser = argparse.ArgumentParser(description='''Application script generator''')
+    parser.add_argument('-c', '--cfgfile', default='appl.cfg',
                             type=str, help='Configuration file')
     parser.add_argument('--log-section', default='log', type=str,
                         help='Log section name in the configuration file')
