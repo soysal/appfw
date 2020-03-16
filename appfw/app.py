@@ -5,7 +5,7 @@
 Application utilities
 
 Created on   : 2019-12-11 ( Ergin Soysal )
-Last modified: Mar 05, 2020, Thu 00:34:59 -0600
+Last modified: Mar 16, 2020, Mon 10:39:37 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -66,7 +66,7 @@ def _configure_log_console(formatter, level):
 
 def _configure_log(config, sec_name):
     global log
-    
+
     if config and config.has_section(sec_name):
         log_conf = config[sec_name]
         appname = log_conf.get('name', None)

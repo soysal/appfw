@@ -9,5 +9,11 @@ parsing support.
 
 ## Usage
 
-   app-init --help
+Type
+
+    app-init
+
+to start. Use following line to get help on commandline options:
+
+    app-init --help
 
