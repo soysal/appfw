@@ -4,7 +4,7 @@
 
 
 Created on   : {now} ( {author} )
-Last modified: Mar 15, 2020, Sun 13:09:34 -0500
+Last modified: {now}
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -18,7 +18,7 @@ import os
 import os.path
 
 import argparse
-from appl import app
+from appfw import app
 
 
 def main(args, config):
