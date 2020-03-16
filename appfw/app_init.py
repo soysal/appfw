@@ -4,7 +4,7 @@
 Application script generator
 
 Created on   : 2020-03-14 ( Ergin Soysal )
-Last modified: Mar 15, 2020, Sun 16:10:46 -0500
+Last modified: Mar 15, 2020, Sun 22:10:27 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -20,7 +20,7 @@ from datetime import datetime
 import getpass
 
 import argparse
-from appl import app
+from . import app
 
 
 DEFAULT_APP_NAME = 'My App'
@@ -28,8 +28,10 @@ DEF_VARS = {
     'now': datetime.now().isoformat(timespec='seconds'),
     'author': getpass.getuser()
 }
-APP_TPL='tpl/app.tpl'
-CONF_TPL='tpl/config.tpl'
+
+TPL_PATH = os.path.join(os.path.dirname(__file__), 'tpl')
+APP_TPL = os.path.join(TPL_PATH, 'app.tpl')
+CONF_TPL = os.path.join(TPL_PATH, 'config.tpl')
 
 def normalize(name):
     normal_name = re.sub(r'\W+', '_', name.lower())
@@ -147,9 +149,13 @@ def parse_args():
     return parser.parse_args()
 
 
-if __name__ == '__main__':
+def run():
     args = parse_args()
     config = app.configure(args)
     main(args, config)
+
+
+if __name__ == '__main__':
+    run()
 
 
