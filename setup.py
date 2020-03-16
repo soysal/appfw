@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='appfw',
-    version='0.5',
+    version='0.6',
     author="Ergin Soysal",
     author_email="esoysal@gmail.com",
     description="Application framework",
