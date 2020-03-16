@@ -5,16 +5,19 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name='appl',
-    version='0.1',
-    scripts=['appl-init'],
+    name='appfw',
+    version='0.5',
     author="Ergin Soysal",
     author_email="esoysal@gmail.com",
     description="Application framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/soysal/appl",
+    url="https://github.com/soysal/appfw",
     packages=setuptools.find_packages(),
+    package_data={'appfw': ['tpl/*.tpl']},
+    entry_points={
+        'console_scripts': ['app-init=appfw.app_init:run'],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
          "License :: OSI Approved :: MIT License",
