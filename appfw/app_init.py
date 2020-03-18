@@ -4,7 +4,7 @@
 Application script generator
 
 Created on   : 2020-03-14 ( Ergin Soysal )
-Last modified: Mar 15, 2020, Sun 22:10:27 -0500
+Last modified: Mar 16, 2020, Mon 13:03:40 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -47,10 +47,6 @@ def cleanup_filename(name):
 def get_app_name(def_val):
     app_name = input ( "Application name [%s]: " % DEFAULT_APP_NAME )
     return app_name if app_name else def_val
-    # if not app_name:
-        # return def_val
-    # else:
-        # return app_name
 
 
 def get_app_filename(name):
