@@ -5,7 +5,7 @@
 Application utilities
 
 Created on   : 2019-12-11 ( Ergin Soysal )
-Last modified: Mar 19, 2020, Thu 13:36:20 -0500
+Last modified: May 10, 2020, Sun 12:25:17 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -30,10 +30,10 @@ def _set_default(obj):
     raise TypeError
 
 
-def write_json(obj, *name_parts):
+def write_json(obj, *name_parts, **kwargs):
     fname = os.path.join(*name_parts)
     with open(fname, 'w') as fp:
-        json.dump(obj, fp, indent=2, default=_set_default)
+        json.dump(obj, fp, default=_set_default, **kwargs)
 
 
 def read(*name_parts):
