@@ -5,7 +5,7 @@
 Application utilities
 
 Created on   : 2019-12-11 ( Ergin Soysal )
-Last modified: May 10, 2020, Sun 12:25:17 -0500
+Last modified: May 10, 2020, Sun 12:45:22 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -46,6 +46,49 @@ def write(text, *name_parts):
     filename = os.path.join(*name_parts)
     with open(filename, 'w') as fh:
         fh.write(text)
+
+
+def _log(lvl, msg, *args, **kwargs):
+    try:
+        log.log(lvl, msg, *args, **kwargs)
+    except:
+        configure_log()
+        log.log(lvl, msg, *args, **kwargs)
+
+
+def debug(lvl, msg, *args, **kwargs):
+    _log(logging.DEBUG, msg, *args, **kwargs)
+
+
+def info(lvl, msg, *args, **kwargs):
+    _log(logging.INFO, msg, *args, **kwargs)
+
+
+def warning(lvl, msg, *args, **kwargs):
+    _log(logging.WARNING, msg, *args, **kwargs)
+
+
+def error(lvl, msg, *args, **kwargs):
+    _log(logging.ERROR, msg, *args, **kwargs)
+
+
+def critical(lvl, msg, *args, **kwargs):
+    _log(logging.CRITICAL, msg, *args, **kwargs)
+
+
+def exception(lvl, msg, *args, exc_info=True, **kwargs):
+    if 'log' not in globals():
+        configure_log()
+
+    _log(logging.ERROR, msg, exc_info=exc_info, *args, **kwargs)
+
+
+def configure_log(level=LOG_LEVEL, format=LOG_FORMAT):
+    global log
+
+    logging.basicConfig(level=level, format=format)
+    log = logging.getLogger()
+    log.debug("Configured logger at level %s to console", level)
 
 
 def configure(args):
@@ -109,9 +152,7 @@ def _configure_log(config, sec_name):
 
         log.info('Log "%s" is configured using section "%s"', appname, sec_name)
     else:
-        logging.basicConfig(format=LOG_FORMAT, level=LOG_LEVEL)
-        log = logging.getLogger()
-        logging.debug("Configured logger at level %s to console", LOG_LEVEL)
+        configure_log()
 
 
 def _get_conf(cfgfile):
