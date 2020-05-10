@@ -4,7 +4,7 @@
 Application script generator
 
 Created on   : 2020-03-14 ( Ergin Soysal )
-Last modified: Mar 16, 2020, Mon 13:03:40 -0500
+Last modified: May 10, 2020, Sun 12:49:10 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -109,10 +109,10 @@ def build(args):
             'log_section':log_section, 'normal_name': normal_name,
             'conf_file': conf_file}
 
-    app.log.info('Generating application file %s', app_file)
+    app.info('Generating application file %s', app_file)
     generate_file(app_file, APP_TPL, vars)
 
-    app.log.info('Generating configuration file %s', conf_file)
+    app.info('Generating configuration file %s', conf_file)
     generate_file(conf_file, CONF_TPL, vars)
 
 
@@ -121,7 +121,7 @@ def main(args, config):
         build(args)
     except Exception as e:
         # raise_with_traceback(e)
-        app.log.exception(e)
+        app.exception(e)
 
 
 def parse_args():

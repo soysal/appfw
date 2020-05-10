@@ -4,7 +4,7 @@
 
 
 Created on   : {now} ( {author} )
-Last modified: {now}
+Last modified: May 10, 2020, Sun 12:51:01 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -26,7 +26,7 @@ def main(args, config):
         pass
     except Exception as e:
         # raise_with_traceback(e)
-        app.log.exception(e)
+        app.exception(e)
 
 
 def parse_args():
