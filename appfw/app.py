@@ -5,7 +5,7 @@
 Application utilities
 
 Created on   : 2019-12-11 ( Ergin Soysal )
-Last modified: May 10, 2020, Sun 12:45:22 -0500
+Last modified: May 13, 2020, Wed 00:01:40 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -35,6 +35,11 @@ def write_json(obj, *name_parts, **kwargs):
     with open(fname, 'w') as fp:
         json.dump(obj, fp, default=_set_default, **kwargs)
 
+def read_json(*name_parts):
+    fname = os.path.join(*name_parts)
+    with open(fname) as fp:
+        return json.load(fp)
+
 
 def read(*name_parts):
     fname = os.path.join(*name_parts)
@@ -56,27 +61,27 @@ def _log(lvl, msg, *args, **kwargs):
         log.log(lvl, msg, *args, **kwargs)
 
 
-def debug(lvl, msg, *args, **kwargs):
+def debug( msg, *args, **kwargs):
     _log(logging.DEBUG, msg, *args, **kwargs)
 
 
-def info(lvl, msg, *args, **kwargs):
+def info(msg, *args, **kwargs):
     _log(logging.INFO, msg, *args, **kwargs)
 
 
-def warning(lvl, msg, *args, **kwargs):
+def warning(msg, *args, **kwargs):
     _log(logging.WARNING, msg, *args, **kwargs)
 
 
-def error(lvl, msg, *args, **kwargs):
+def error(msg, *args, **kwargs):
     _log(logging.ERROR, msg, *args, **kwargs)
 
 
-def critical(lvl, msg, *args, **kwargs):
+def critical(msg, *args, **kwargs):
     _log(logging.CRITICAL, msg, *args, **kwargs)
 
 
-def exception(lvl, msg, *args, exc_info=True, **kwargs):
+def exception(msg, *args, exc_info=True, **kwargs):
     if 'log' not in globals():
         configure_log()
 
