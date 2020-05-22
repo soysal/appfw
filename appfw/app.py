@@ -5,7 +5,7 @@
 Application utilities
 
 Created on   : 2019-12-11 ( Ergin Soysal )
-Last modified: May 13, 2020, Wed 00:01:40 -0500
+Last modified: May 21, 2020, Thu 20:39:27 -0500
 """
 from __future__ import absolute_import
 from __future__ import division
@@ -35,29 +35,30 @@ def write_json(obj, *name_parts, **kwargs):
     with open(fname, 'w') as fp:
         json.dump(obj, fp, default=_set_default, **kwargs)
 
+
 def read_json(*name_parts):
     fname = os.path.join(*name_parts)
     with open(fname) as fp:
         return json.load(fp)
 
 
-def read(*name_parts):
-    fname = os.path.join(*name_parts)
-    with open(fname, 'r') as fh:
-        return fh.read()
-
-
 def write(text, *name_parts):
     filename = os.path.join(*name_parts)
-    with open(filename, 'w') as fh:
-        fh.write(text)
+    with open(filename, 'w') as fp:
+        fp.write(text)
+
+
+def read(*name_parts):
+    fname = os.path.join(*name_parts)
+    with open(fname, 'r') as fp:
+        return fp.read()
 
 
 def _log(lvl, msg, *args, **kwargs):
     try:
         log.log(lvl, msg, *args, **kwargs)
     except:
-        configure_log()
+        configure_default_logger()
         log.log(lvl, msg, *args, **kwargs)
 
 
@@ -83,17 +84,17 @@ def critical(msg, *args, **kwargs):
 
 def exception(msg, *args, exc_info=True, **kwargs):
     if 'log' not in globals():
-        configure_log()
+        configure_default_logger()
 
     _log(logging.ERROR, msg, exc_info=exc_info, *args, **kwargs)
 
 
-def configure_log(level=LOG_LEVEL, format=LOG_FORMAT):
+def configure_default_logger(level=LOG_LEVEL, format=LOG_FORMAT):
     global log
 
-    logging.basicConfig(level=level, format=format)
+    logging.basicConfig(format=format, level=level)
     log = logging.getLogger()
-    log.debug("Configured logger at level %s to console", level)
+    logging.debug("Configured logger at level %s to console", level)
 
 
 def configure(args):
@@ -156,8 +157,8 @@ def _configure_log(config, sec_name):
             log.info('Logging at level %s to console', ch_level)
 
         log.info('Log "%s" is configured using section "%s"', appname, sec_name)
-    else:
-        configure_log()
+    elif log is None:
+        configure_default_logger()
 
 
 def _get_conf(cfgfile):
